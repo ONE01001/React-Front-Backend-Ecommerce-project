@@ -1,5 +1,4 @@
 import { Link } from "react-router";
-
 import logo from "../../assets/images/icons/logo.png";
 import mobileLogo from "../../assets/images/icons/mobile-logo.png";
 import checkoutLockIcon from "../../assets/images/icons/checkout-lock-icon.png";

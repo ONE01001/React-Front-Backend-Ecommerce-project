@@ -1,6 +1,6 @@
-import { HomePage } from "./pages/HomePage";
+import { HomePage } from "./pages/home/HomePage";
 import { CheckoutPage } from "./pages/Checkout/CheckoutPage";
-import { OrdersPage } from "./pages/orderspage";
+import { OrdersPage } from "./pages/orders/orderspage";
 import { Tracking } from "./pages/Tracking";
 import { ErrorPage } from "./pages/Errorpage";
 import { Routes, Route } from "react-router";
