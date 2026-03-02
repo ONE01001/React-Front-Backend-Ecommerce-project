@@ -5,6 +5,7 @@ import "./orderspage.css";
 import { formatMoney } from "../../utils/money";
 import buyAgainIcon from "../../assets/images/icons/buy-again.png";
 import { Header } from "../../components/Header";
+import { Link } from "react-router";
 
 export function OrdersPage({ cart }) {
   const [orders, setOrders] = useState([]);
@@ -86,11 +87,13 @@ export function OrdersPage({ cart }) {
                         </div>
 
                         <div className="product-actions">
-                          <a href="/tracking">
+                          <Link
+                            to={`/tracking/${order.id}/${orderProduct.product.id}`}
+                          >
                             <button className="track-package-button button-secondary">
                               Track package
                             </button>
-                          </a>
+                          </Link>
                         </div>
                       </Fragment>
                     );

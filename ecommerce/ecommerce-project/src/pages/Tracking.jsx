@@ -1,6 +1,5 @@
 import { Header } from "../components/Header";
-import { Link } from "react-router";
-
+import { Link, useParams } from "react-router";
 import logoWhite from "../assets/images/icons/logo-white.png";
 import mobileLogoWhite from "../assets/images/icons/mobile-logo-white.png";
 import searchIcon from "../assets/images/icons/search-icon.png";
@@ -8,11 +7,15 @@ import cartIcon from "../assets/images/icons/cart-icon.png";
 
 import "./Tracking.css";
 
-export function Tracking() {
+export function Tracking({ cart }) {
+  // grab the dynamic values from the URL (must match the route param names)
+  const { orderId, productId } = useParams();
+
   return (
     <>
       <Header />
-      <link rel="icon" type="image/svg+xml" to="tracking-favicon.png" />
+      {/* favicon tag should use href, though it usually goes in index.html */}
+      <link rel="icon" type="image/svg+xml" href="tracking-favicon.png" />
       <div className="header">
         <div className="left-section">
           <Link to="/" className="header-link">
@@ -44,6 +47,10 @@ export function Tracking() {
 
       <div className="tracking-page">
         <div className="order-tracking">
+          {/* display route parameters for debugging */}
+          <div className="debug-ids">
+            orderId: {orderId}, productId: {productId}
+          </div>
           <Link className="back-to-orders-link link-primary" to="/orders">
             View all orders
           </Link>

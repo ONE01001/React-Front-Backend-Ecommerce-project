@@ -9,6 +9,13 @@ export function PaymentSummary({paymentSummary}) {
 
       {paymentSummary && (
         <>
+          {/* make sure numeric values are defined so formatMoney doesn't produce NaN */}
+          {paymentSummary.totalItems == null && (paymentSummary.totalItems = 0)}
+          {paymentSummary.productCostCents == null && (paymentSummary.productCostCents = 0)}
+          {paymentSummary.shippingCostCents == null && (paymentSummary.shippingCostCents = 0)}
+          {paymentSummary.totalCostBeforeTaxCents == null && (paymentSummary.totalCostBeforeTaxCents = 0)}
+          {paymentSummary.taxCents == null && (paymentSummary.taxCents = 0)}
+          {paymentSummary.totalCostCents == null && (paymentSummary.totalCostCents = 0)}
           <div className="payment-summary-row">
             <div>Items ({paymentSummary.totalItems}):</div>
             <div className="payment-summary-money">
@@ -26,21 +33,21 @@ export function PaymentSummary({paymentSummary}) {
           <div className="payment-summary-row subtotal-row">
             <div>Total before tax:</div>
             <div className="payment-summary-money">
-              {formatMoney(paymentSummary.totatCostBeforeTaxCents)}
+              {formatMoney(paymentSummary.totalCostBeforeTaxCents)}
             </div>
           </div>
 
           <div className="payment-summary-row">
             <div>Estimated tax (10%):</div>
             <div className="payment-summary-money">
-              {formatMoney(paymentSummary.taxCentsCents)}
+              {formatMoney(paymentSummary.taxCents)}
             </div>
           </div>
 
           <div className="payment-summary-row total-row">
             <div>Order total:</div>
             <div className="payment-summary-money">
-              {formatMoney(paymentSummary.totatCostCents)}
+              {formatMoney(paymentSummary.totalCostCents)}
             </div>
           </div>
 
