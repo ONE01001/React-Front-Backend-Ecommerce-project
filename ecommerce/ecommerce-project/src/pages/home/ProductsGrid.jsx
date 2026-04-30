@@ -1,3 +1,4 @@
+import axios from "axios";
 import { formatMoney } from "../../utils/money";
 import checkmarkIcon from "../../assets/images/icons/checkmark.png";
 export function ProductsGrid({ products }) {
@@ -51,7 +52,14 @@ export function ProductsGrid({ products }) {
                 Added
               </div>
 
-              <button className="add-to-cart-button button-primary">
+              <button className="add-to-cart-button button-primary"
+              onClick={()=>{
+                axios.post('/api/cart-items' ,{
+                  productId: product.id   ,
+                  quantity: 1
+                })
+              }}
+              >
                 Add to Cart
               </button>
             </div>
