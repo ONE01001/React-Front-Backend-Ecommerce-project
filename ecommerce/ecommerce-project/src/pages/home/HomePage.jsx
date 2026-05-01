@@ -22,7 +22,7 @@ export function HomePage({ cart , LoadCart}) {
       <title>HomePage</title>
 
       <div className="home-page">
-        <ProductsGrid products={products} loadCart={LoadCart} />
+        <ProductsGrid products={products} LoadCart={LoadCart} />
       </div>
     </>
   );
