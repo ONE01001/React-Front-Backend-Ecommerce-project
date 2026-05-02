@@ -2,16 +2,14 @@ import axios from "axios";
 import { useNavigate } from "react-router";
 import { formatMoney } from "../../utils/money";
 
-
-
-export function PaymentSummary({paymentSummary , LoadCart}) {
-      const navigate = useNavigate();
+export function PaymentSummary({ paymentSummary, LoadCart }) {
+  const navigate = useNavigate();
 
   const createOrder = async () => {
-   await axios.post("/api/orders");
-   await LoadCart();
-   navigate("/orders");
-  }     
+    await axios.post("/api/orders");
+    await LoadCart();
+    navigate("/orders");
+  };
 
   return (
     <div className="payment-summary">
@@ -21,11 +19,15 @@ export function PaymentSummary({paymentSummary , LoadCart}) {
         <>
           {/* make sure numeric values are defined so formatMoney doesn't produce NaN */}
           {paymentSummary.totalItems == null && (paymentSummary.totalItems = 0)}
-          {paymentSummary.productCostCents == null && (paymentSummary.productCostCents = 0)}
-          {paymentSummary.shippingCostCents == null && (paymentSummary.shippingCostCents = 0)}
-          {paymentSummary.totalCostBeforeTaxCents == null && (paymentSummary.totalCostBeforeTaxCents = 0)}
+          {paymentSummary.productCostCents == null &&
+            (paymentSummary.productCostCents = 0)}
+          {paymentSummary.shippingCostCents == null &&
+            (paymentSummary.shippingCostCents = 0)}
+          {paymentSummary.totalCostBeforeTaxCents == null &&
+            (paymentSummary.totalCostBeforeTaxCents = 0)}
           {paymentSummary.taxCents == null && (paymentSummary.taxCents = 0)}
-          {paymentSummary.totalCostCents == null && (paymentSummary.totalCostCents = 0)}
+          {paymentSummary.totalCostCents == null &&
+            (paymentSummary.totalCostCents = 0)}
           <div className="payment-summary-row">
             <div>Items ({paymentSummary.totalItems}):</div>
             <div className="payment-summary-money">
@@ -61,8 +63,9 @@ export function PaymentSummary({paymentSummary , LoadCart}) {
             </div>
           </div>
 
-          <button className="place-order-button button-primary"
-          onClick = {createOrder}
+          <button
+            className="place-order-button button-primary"
+            onClick={createOrder}
           >
             Place your order
           </button>
