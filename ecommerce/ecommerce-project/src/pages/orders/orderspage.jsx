@@ -7,7 +7,7 @@ import buyAgainIcon from "../../assets/images/icons/buy-again.png";
 import { Header } from "../../components/Header";
 import { Link } from "react-router";
 
-export function OrdersPage({ cart }) {
+export function OrdersPage({ cart, LoadCart }) {
   const [orders, setOrders] = useState([]);
 
   useEffect(() => {
@@ -75,7 +75,13 @@ export function OrdersPage({ cart }) {
                           <div className="product-quantity">
                             Quantity: {orderProduct.quantity}
                           </div>
-                          <button className="buy-again-button button-primary">
+                          <button className="buy-again-button button-primary" onClick={async () => {
+                            await axios.post("/api/cart-items", {
+                              productId: orderProduct.product.id,
+                              quantity: 1,
+                            });
+                            await LoadCart();
+                          }}>
                             <img
                               className="buy-again-icon"
                               src={buyAgainIcon}

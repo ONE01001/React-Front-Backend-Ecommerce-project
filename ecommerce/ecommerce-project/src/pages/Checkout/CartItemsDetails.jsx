@@ -1,7 +1,9 @@
 import { formatMoney } from "../../utils/money";
 import axios from "axios";
+import { useState } from "react";
 
 export function CartItemDetails({ cartItem , LoadCart}) {
+  const [quantity, setQuantity] = useState(cartItem.quantity);
     
   const deleteCartItem = async () => {
     await axios.delete(`/api/cart-items/${cartItem.productId}`);
@@ -20,7 +22,12 @@ export function CartItemDetails({ cartItem , LoadCart}) {
         <div className="product-quantity">
           <span>
             Quantity:{" "}
-            <span className="quantity-label">{cartItem.quantity}</span>
+            <input 
+              className="quantity-input"
+              type="number" 
+              value={quantity}
+              onChange={(event) => setQuantity(event.target.value)}
+            />
           </span>
           <span className="update-quantity-link link-primary">Update</span>
           <span className="delete-quantity-link link-primary"
