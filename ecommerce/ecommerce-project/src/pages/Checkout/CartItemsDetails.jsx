@@ -11,6 +11,14 @@ export function CartItemDetails({ cartItem , LoadCart}) {
     await LoadCart();
   };
 
+  const updateQuantity = async () => {
+    await axios.put(`/api/cart-items/${cartItem.productId}`, {
+      quantity: Number(quantity)
+    });
+    await LoadCart();
+    setIsUpdating(false);
+  };
+
   return (
     <>
       <img className="product-image" src={cartItem.product.image} />
@@ -29,12 +37,26 @@ export function CartItemDetails({ cartItem , LoadCart}) {
                 type="number" 
                 value={quantity}
                 onChange={(event) => setQuantity(event.target.value)}
+                onKeyDown={(event) => {
+                  if (event.key === 'Enter') {
+                    updateQuantity();
+                  } else if (event.key === 'Escape') {
+                    setQuantity(cartItem.quantity);
+                    setIsUpdating(false);
+                  }
+                }}
               />
             ) : (
               <span className="quantity-label">{quantity}</span>
             )}
           </span>
-          <span className="update-quantity-link link-primary" onClick={() => setIsUpdating(!isUpdating)}>Update</span>
+          <span className="update-quantity-link link-primary" onClick={() => {
+            if (isUpdating) {
+              updateQuantity();
+            } else {
+              setIsUpdating(true);
+            }
+          }}>Update</span>
           <span className="delete-quantity-link link-primary"
             onClick ={deleteCartItem}>
             Delete</span>
